@@ -17,25 +17,29 @@ st.title('Comparison of Hindu and Muslim Populations in Bihar')
 num_entries = 50
 data = generate_sample_data(num_entries)
 
-# Plot a bar chart for population comparison
-fig, ax = plt.subplots(figsize=(12, 6))  # Adjust the figure size
-x = np.arange(num_entries)
-width = 0.4  # Adjust the bar width
+# Allow user to select a location
+selected_location = st.selectbox('Select a location:', [f'Entry {i+1}' for i in range(num_entries)])
 
-ax.bar(x - width/2, data['Population'][0], width, label='Hindu',color="orange")
-ax.bar(x + width/2, data['Population'][1], width, label='Muslim',color="#7cfc00")
+# Get the index of the selected location
+location_index = int(selected_location.split()[1]) - 1
 
-ax.set_xlabel('Entry', fontsize=12)
+# Plot a bar chart for population comparison for the selected location
+fig, ax = plt.subplots(figsize=(12, 6))
+width = 0.4
+
+ax.bar(np.arange(2) - width/2, data['Population'][0][location_index], width, label='Hindu', color='orange')
+ax.bar(np.arange(2) + width/2, data['Population'][1][location_index], width, label='Muslim', color='#aaffaa')
+
+ax.set_xlabel('Religion', fontsize=12)
 ax.set_ylabel('Population', fontsize=12)
-ax.set_title('Population Comparison', fontsize=14)
-ax.set_xticks(x)
-ax.set_xticklabels([f'Entry {i+1}' for i in range(num_entries)], rotation=45, ha='right')
+ax.set_title(f'Population Comparison for {selected_location}', fontsize=14)
+ax.set_xticks(np.arange(2))
+ax.set_xticklabels(['Hindu', 'Muslim'])
 
-# Add legend and grid
 ax.legend()
 ax.grid(True)
 
-plt.tight_layout()  # Adjust layout
+plt.tight_layout()
 
 # Display the plot using Streamlit
 st.pyplot(fig)

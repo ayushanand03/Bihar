@@ -22,8 +22,8 @@ fig, ax = plt.subplots(figsize=(12, 6))  # Adjust the figure size
 x = np.arange(num_entries)
 width = 0.4  # Adjust the bar width
 
-ax.bar(x - width/2, data['Population'][0], width, label='Hindu')
-ax.bar(x + width/2, data['Population'][1], width, label='Muslim')
+ax.bar(x - width/2, data['Population'][0], width, label='Hindu',color="orange")
+ax.bar(x + width/2, data['Population'][1], width, label='Muslim',color="green")
 
 ax.set_xlabel('Entry', fontsize=12)
 ax.set_ylabel('Population', fontsize=12)

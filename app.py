@@ -20,6 +20,10 @@ data = generate_sample_data(num_entries)
 # Allow user to select whether to display all entries
 display_all = st.checkbox('Display All Entries')
 
+# Display the data frame
+st.write('Population Data:')
+st.write(data)
+
 if display_all:
     # Plot a grouped bar chart for population comparison for all entries
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -55,16 +59,4 @@ else:
     ax.bar(np.arange(2) - width/2, data['Population'][0][location_index], width, label='Hindu', color='orange')
     ax.bar(np.arange(2) + width/2, data['Population'][1][location_index], width, label='Muslim', color='#aaffaa')
 
-    ax.set_xlabel('Religion', fontsize=12)
-    ax.set_ylabel('Population', fontsize=12)
-    ax.set_title(f'Population Comparison for {selected_location}', fontsize=14)
-    ax.set_xticks(np.arange(2))
-    ax.set_xticklabels(['Hindu', 'Muslim'])
-
-    ax.legend()
-    ax.grid(True)
-
-    plt.tight_layout()
-
-    # Display the plot using Streamlit
-    st.pyplot(fig)
+    ax.set_xlabel('Religion
